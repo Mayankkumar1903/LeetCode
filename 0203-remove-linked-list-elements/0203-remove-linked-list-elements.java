@@ -9,19 +9,22 @@
  * }
  */
 class Solution {
-    public ListNode removeElements(ListNode head, int value) {
-        ListNode dummy=new ListNode(-1);
-        dummy.next=head;
-        // if(head==null) return null;
-        // if(head.next==null&&head.val==value)return null;
-      ListNode temp=dummy;
-        while(temp.next!=null&&temp!=null){
-            if(temp.next.val==value)
-                temp.next=temp.next.next;
-            else
-                temp=temp.next;
+    public ListNode removeElements(ListNode head, int val) {
+       while(head!=null && head.val==val){
+            head = head.next;
         }
-        return dummy.next;
+        
+        ListNode temp = head;
+        while(temp!=null && temp.next!=null){
+            if(temp.next.val == val){
+                temp.next = temp.next.next;
+            }
+            else{
+                temp = temp.next;
+            }
+        }
+        
+        return head;
         
     }
 }
