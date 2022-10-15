@@ -10,21 +10,19 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-       ListNode list = head;
-         
-         while(list != null) {
-        	 if (list.next == null) {
-        		 break;
-        	 }
-        	 if (list.val == list.next.val) {
-        		 list.next = list.next.next;
-        	 }
-           else {
-        		 list = list.next;
-        	 }
-         }
-         
-         return head;  
+         HashSet<Integer> set = new HashSet();
+        ListNode temp = head;
+        ListNode nonDuplicate = null;
+        while(temp!=null){
+            if(!set.contains(temp.val)){
+               set.add(temp.val);
+                nonDuplicate=temp;
+            }else{
+                nonDuplicate.next=temp.next;
+            }
+            temp=temp.next;
+        }
+        return head;
     }
 }
  // head.next = deleteDuplicates(head.next);
