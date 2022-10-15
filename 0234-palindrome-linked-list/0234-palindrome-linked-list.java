@@ -10,33 +10,27 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-         // create a stack using Stack() class 
-    
-	    Stack<Integer> stack = new Stack<Integer>();
-    
-        // assign temp to the head and push all nodes into stack
-        ListNode temp = head;
-        while (temp!= null)
-        {
-              stack.push(temp.val);
-              temp=temp.next;
-         }
-    
-       // now again make temp as head and performing 
-       // stack pop() compare first element of linkedlist
-      // and top of satck
-      // at any moment ,if the values are not equal return false;
-    
-      temp = head;
-      while (temp != null)
-      {
-            if (stack.pop() != temp.val)
-                 return false;
-           temp = temp.next;
-      }
-    
-      // if traversal of linkedlist and stack pops are equal return true
-     return true;
+//       reverse the linked list and store it in another linked list
+//         compare the two lists
+        ListNode temp = new ListNode();
+ListNode a = head;
+ListNode pre = null;
+
+while (a != null) {
+	temp = new ListNode(a.val);
+	temp.next = pre;
+	pre = temp;
+	a = a.next;
+}
+
+while (pre != null) {
+	if (pre.val != head.val) 
+		return false;
+	pre = pre.next;
+	head = head.next;
+}
+
+return true;
     }
 }
 
