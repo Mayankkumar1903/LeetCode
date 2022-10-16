@@ -1,32 +1,19 @@
 class Solution {
     public String simplifyPath(String path) {
-       Stack<String> stk = new Stack<>();
-        String ans = "";
-        int record = 0;
-        for(int i = 0 ; i < path.length(); ++i){
-            if(path.charAt(i) == '/')
-                continue;
-            String temp = ""; // make temp string = 0 everytime
-            while(i<path.length() && path.charAt(i) != '/'){
-                temp += path.charAt(i);
-                ++i;
-            }
-            switch(temp){
-                case ".":
-                    // ++i;
-                    break;
-                case "..":
-                    if(!stk.isEmpty()) stk.pop();
-                    break;
-                default:
-                    stk.push(temp);
-            }
+// first seperate all the tokens using / as tokenizer
+//         then check if its empty continue , . then also continue, and if ".."then pop the top element from stack
+//         return 
+      
+      String[] paths = path.split("/");
+        Stack<String> st = new Stack<>();
+        for(String s:paths){
+            if(s.equals("")) continue;
+            else if(s.equals(".")) continue;
+            else if(s.equals("..")) 
+                if(!st.isEmpty()) st.pop();
+                else continue;
+            else st.add(s);
         }
-            
-        while(!stk.isEmpty()){
-            ans = "/"+ stk.pop() + ans ;
-        }
-        return (ans.length() == 0 ) ? "/" : ans;
-    
+        return "/"+String.join("/", st);
     }
 }
