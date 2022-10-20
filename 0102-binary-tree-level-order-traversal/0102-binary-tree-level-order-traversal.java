@@ -13,6 +13,11 @@
  *     }
  * }
  */
+
+// declare a queue that keeps the node;
+// add the root element to queue;
+// pop the element from queue and add the left and right node to queue;
+
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> flist=new LinkedList<List<Integer>>();
