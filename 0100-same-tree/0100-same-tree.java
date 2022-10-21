@@ -15,8 +15,30 @@
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        if(p==null||q==null)
-            return p==q;
-        return (p.val==q.val) && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+         // Base case 
+    if(p==null && q==null){
+        return true;
+    }
+    if(p==null && q!=null){
+        return false;
+    }
+    if(p!=null && q==null){
+        return false;
+    }
+    
+    // recursive call for both  tree
+    boolean left=isSameTree(p.left,q.left);
+    boolean right=isSameTree(p.right, q.right);
+    
+    // check values for both root samme or not
+    boolean check = p.val==q.val;
+    
+    // check and return
+    if(left && right && check){
+        return true;
+    }
+    else{
+        return false;
+    }
     }
 }
