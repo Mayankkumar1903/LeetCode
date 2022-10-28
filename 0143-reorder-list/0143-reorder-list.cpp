@@ -10,29 +10,49 @@
  */
 class Solution {
 public:
+    ListNode* reverse(ListNode* head)
+    {
+        ListNode* prev=NULL;
+        ListNode* curr=head;
+        ListNode* nxt=NULL;
+        
+        while(curr)
+        {
+            nxt=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nxt;
+        }
+        return prev;
+    }
+    
     void reorderList(ListNode* head) {
-//          first we will see brute force solution
-//          let us consider 1->2->3->4->5->6
-//         we have to convert it to 1->6->2->5->3->4
-//           
         
-//          first we will check if there is 0 , 1 or 2 node then we can't reorder
-        if(!head || !head->next || ! head->next->next)
-            return ;
-//         we will travese the linked list and find the second last  node 
-//         i.e , in the above example 5 and set the address contained in  1 to 6 and 6->2 and 1->6 and set 5->NULL
-           
-        ListNode * temp = head;
-        while(temp-> next -> next)
-            temp=temp-> next;
+        //step 1 - using slow and fast pointer approach to find the mid of the list
+        ListNode* slow=head;
+        ListNode* fast=head->next;
         
-        temp-> next -> next= head->next;
-        head-> next = temp-> next;
-         
-        temp-> next= NULL;
-         
-//          now we will do the above steps recusively
+        while(fast and fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
         
-        reorderList(head-> next-> next);
+        //step 2 - reverse the second half and split the List into two.
+        ListNode* second=reverse(slow->next); // independent list second
+        slow->next=NULL;
+        ListNode* first=head; // independent list first
+        
+        //step 3 - merging the two list
+        // second list can be shorter when LL size is odd
+        while(second)
+        {
+            ListNode* temp1=first->next;
+            ListNode* temp2=second->next;
+            first->next=second;
+            second->next=temp1;
+            first=temp1;
+            second=temp2;
+        }
     }
 };
