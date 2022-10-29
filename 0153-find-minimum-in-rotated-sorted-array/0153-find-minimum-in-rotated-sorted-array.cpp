@@ -26,7 +26,8 @@ public:
             else if( nums[mid]> nums[ end]){
                 start = mid+1;
             }
-            else end= mid-1;
+            else 
+                end= mid-1;
         }
       return -1;
     }
