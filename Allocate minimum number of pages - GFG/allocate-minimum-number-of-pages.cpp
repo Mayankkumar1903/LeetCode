@@ -12,102 +12,52 @@ class Solution
 {
     public:
     //Function to find minimum number of pages.
-    bool is_possible(int arr[], int n, int m,int mid){
-
-        
-
-        int page_sum=0;
-
-        int student=1;
-
-        for(int i=0;i<n;i++){
-
-            
-
-            if(page_sum+arr[i] <= mid){
-
-                page_sum+=arr[i];
-
-            }
-
-            else{
-
-                student++;
-
-                if(arr[i] > mid || student > m){
-
-                    return false;
-
-                }
-
-                page_sum=0;
-
-                page_sum+=arr[i];
-
-            }
-
-        }
-
-        return true;
-
-    }
-
-    
-
-    int findPages(int arr[], int n, int m) 
-
+    int findPages(int arr[], int n, int k) 
     {
-
         //code here
-
-        
-
-        if(m > n){
-
-            return -1;
-
-        }
-
-        int l=0;
-
-        int u=0;
-
-        
-
+        int start =0;
+        int end = 0;
         for(int i=0;i<n;i++){
-
-            u+=arr[i];
-
+            end += arr[i];
         }
-
-        int ans=-1;
-
-        int mid;
-
-        while(l<=u){
-
-             mid= l+(u-l)/2;
-
-             
-
-             if(is_possible(arr,n,m,mid)){
-
-                 ans=mid;
-
-                 u=mid-1;
-
-             }
-
-             else{
-
-                 l=mid+1;
-
-             }
-
+        
+        int res=-1;
+        if(k>n)
+        return -1;
+        
+        while( start <= end){
+            int mid= start + (end - start)/2;
+            if(possible_to_give(arr, n, k, mid))
+            {
+                res = mid;
+                end = mid-1;
+            }
+            else 
+              {
+                  start = mid+1;
+              }
         }
-
-        return ans;
-
+        return res;
+    }
+    
+    bool possible_to_give(int arr[],int n,int k,int mid){
+        int page_sum=0;
+        int student=1;
+        for(int i=0;i<n;i++){
+            if(page_sum + arr[i]<= mid)
+               page_sum +=arr[i];
+               
+             else {
+                 student++;
+                 if(arr[i]>mid || student > k){
+                     return false;
+                 }
+                 
+                 page_sum=0;
+                 page_sum+=arr[i];
+             }
+        }
+        return true;
     }
 };
 
