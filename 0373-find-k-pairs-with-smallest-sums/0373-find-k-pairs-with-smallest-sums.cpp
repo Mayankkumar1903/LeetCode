@@ -2,11 +2,14 @@ typedef pair<int,pair<int,int>> ppi;
 class Solution {
 public:
     vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
-        vector<vector<int>> res;
+        vector<vector<int>> res; 
+        
         int n1 = nums1.size();
         int n2 = nums2.size();
         
         priority_queue<ppi, vector<ppi> , greater<ppi>> minh;
+        // you can also write pair<int,pair<int,int>> in place of ppi;
+        
         
         for(int i=0; i<n1&&i<k; i++){
             minh.push({nums1[i]+nums2[0],{i,0}});
