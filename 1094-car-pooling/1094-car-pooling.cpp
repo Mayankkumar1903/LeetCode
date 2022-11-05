@@ -1,22 +1,9 @@
-typedef pair<int,int> pd;
 class Solution {
 public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
-          int seat=0;
-        priority_queue<pd, vector<pd>, greater<pd>>pq;
-        for(auto it : trips)
-        {
-              pq.push({it[1], +it[0]});
-              pq.push({it[2], -it[0]});
-        }
-        while(!pq.empty())
-        {
-            // cout<<pq.top().first<<" "<<pq.top().second<<endl;
-            // cout<<"seat-"<<seat<<endl;
-            seat+=pq.top().second;
-            if(seat>capacity) return false;
-            pq.pop();
-        }
-        return true;
+          int stops[1001] = {};
+  for (auto t : trips) stops[t[1]] += t[0], stops[t[2]] -= t[0];
+  for (auto i = 0; capacity >= 0 && i < 1001; ++i) capacity -= stops[i];
+  return capacity >= 0;
     }
 };
