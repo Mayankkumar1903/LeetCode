@@ -13,6 +13,7 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode preHead(0), *p = &preHead;
     int extra = 0;
+//          try for this tescase:  9,9,9 and 9,9,9  => 8,9,9,1
     while (l1 || l2 || extra) {
         int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + extra;
         extra = sum / 10;
