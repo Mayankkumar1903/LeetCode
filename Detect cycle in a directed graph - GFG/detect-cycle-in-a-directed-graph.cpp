@@ -36,7 +36,7 @@ class Solution {
 	        }
 	    }
 	        
-	       if(count==V)return false;
+	       if(count==V)return false;//if the topo sort was produced i.e , not cylcle
 	       else 
 	       return true;
     }
